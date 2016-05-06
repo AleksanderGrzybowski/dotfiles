@@ -1,0 +1,32 @@
+[color]
+	ui = true
+	status = auto
+	branch = auto
+[core]
+	editor = vim
+	autocrlf = input
+[merge]
+	conflictstyle = diff3
+[user]
+	name = Aleksander Grzybowski
+	email = some@email.com
+	useconfigonly = true
+[push]
+	default = current
+[credential]
+	helper = cache --timeout=28800
+[branch]
+	autosetuprebase = always
+
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset %Cgreen%an%Creset:%C(yellow)%d%Creset %s %Cblue%cr %C(magenta)%Creset' --all
+	co = checkout
+	ci = commit
+	br = branch -v
+	st = status
+	mg = merge
+	pu = pull
+	fe = fetch
+    standup = !git --no-pager log --pretty=format:'%C(yellow)%h %Cred%ad %Creset%s' --date=short --author='Aleksander Grzybowski' -n 10
+    unstage = reset -q HEAD --
+    discard = checkout --
