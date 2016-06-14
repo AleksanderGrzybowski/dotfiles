@@ -51,7 +51,30 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git docker bower gradle grails gulp mvn)
 
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^G" edit-command-line
+
 # User configuration
+
+# Konsole color changing
+theme-dark() {
+  switch-term-color "colors=Solarized"
+  sed -i.bak s/background=light/background=dark/g ~/.vimrc
+}
+theme-light() {
+  switch-term-color "colors=Solarized Light"
+  sed -i.bak s/background=dark/background=light/g ~/.vimrc
+}
+switch-term-color() {
+  arg="${1:-colors=Tomorrow}"
+  if [[ -z "$TMUX" ]]
+  then
+    konsoleprofile "$arg"
+  else
+    printf '\033Ptmux;\033\033]50;%s\007\033\\' "$arg"
+  fi
+}
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:."
 export PATH=./node_modules/.bin:$PATH
@@ -64,6 +87,7 @@ alias s='sudo'
 alias gitk='gitk --all'
 alias gitg='gitg --all'
 alias docker='sudo docker'
+alias docker-compose='sudo docker-compose'
 alias mocha="mocha --no-colors"
 
 setopt NO_HUP
