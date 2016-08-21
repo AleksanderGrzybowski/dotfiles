@@ -66,10 +66,16 @@ bindkey "^G" edit-command-line
 theme-dark() {
   printf '\033Ptmux;\033\033]50;konsoleprofile colors=Solarized\007\033\\'
   sed -i.bak s/background=light/background=dark/g ~/.vimrc
+  sed -i.bak "s/.*set -g status-bg colour.*/set -g status-bg colour0/g" ~/.tmux.conf
+  sed -i.bak "s/.*set -g status-fg colour.*/set -g status-fg colour7/g" ~/.tmux.conf
+  tmux source-file ~/.tmux.conf
 }
 theme-light() {
   printf '\033Ptmux;\033\033]50;konsoleprofile colors=SolarizedLight\007\033\\'
   sed -i.bak s/background=dark/background=light/g ~/.vimrc
+  sed -i.bak "s/.*set -g status-bg colour.*/set -g status-bg colour7/g" ~/.tmux.conf
+  sed -i.bak "s/.*set -g status-fg colour.*/set -g status-fg colour0/g" ~/.tmux.conf
+  tmux source-file ~/.tmux.conf
 }
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:."
