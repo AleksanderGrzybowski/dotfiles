@@ -42,6 +42,10 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
+# unlimited history size
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -49,8 +53,9 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker bower gradle grails gulp mvn)
+plugins=(git docker bower gradle grails gulp mvn npm node)
 
+# ctrl-g opens editor with command line
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^G" edit-command-line
@@ -59,21 +64,12 @@ bindkey "^G" edit-command-line
 
 # Konsole color changing
 theme-dark() {
-  switch-term-color "colors=Solarized"
+  printf '\033Ptmux;\033\033]50;konsoleprofile colors=Solarized\007\033\\'
   sed -i.bak s/background=light/background=dark/g ~/.vimrc
 }
 theme-light() {
-  switch-term-color "colors=Solarized Light"
+  printf '\033Ptmux;\033\033]50;konsoleprofile colors=SolarizedLight\007\033\\'
   sed -i.bak s/background=dark/background=light/g ~/.vimrc
-}
-switch-term-color() {
-  arg="${1:-colors=Tomorrow}"
-  if [[ -z "$TMUX" ]]
-  then
-    konsoleprofile "$arg"
-  else
-    printf '\033Ptmux;\033\033]50;%s\007\033\\' "$arg"
-  fi
 }
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:."
@@ -101,5 +97,7 @@ stty -ixon
 
 export NVM_DIR="/home/kelog/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 export SDKMAN_DIR="/home/kelog/.sdkman"
 [[ -s "/home/kelog/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kelog/.sdkman/bin/sdkman-init.sh"
+

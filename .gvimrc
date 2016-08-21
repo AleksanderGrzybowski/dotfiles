@@ -1,4 +1,5 @@
-" font resizing
+
+" changing font size
 let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
 let s:minfontsize = 6
 let s:maxfontsize = 16
@@ -30,6 +31,7 @@ command! SmallerFont call SmallerFont()
 nnoremap <C-kPlus> :LargerFont<CR>
 nnoremap <C-kMinus> :SmallerFont<CR>
 
+" default window size
 if has("gui_running")
 	set lines=36 columns=80
 endif
