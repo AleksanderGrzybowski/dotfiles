@@ -5,7 +5,8 @@ export ZSH=/home/kelog/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+
+. ~/.theme.sh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -68,14 +69,20 @@ theme-dark() {
   sed -i.bak s/background=light/background=dark/g ~/.vimrc
   sed -i.bak "s/.*set -g status-bg colour.*/set -g status-bg colour0/g" ~/.tmux.conf
   sed -i.bak "s/.*set -g status-fg colour.*/set -g status-fg colour7/g" ~/.tmux.conf
+  sed -i.bak "s/.*Solarized.*/ColorScheme=Solarized Dark/g" ~/.local/share/konsole/Profile\ 1.profile
   tmux source-file ~/.tmux.conf
+  echo "ZSH_THEME=\"agnoster-kelog\"" > ~/.theme.sh
+  source ~/.zshrc
 }
 theme-light() {
   printf '\033Ptmux;\033\033]50;konsoleprofile colors=SolarizedLight\007\033\\'
   sed -i.bak s/background=dark/background=light/g ~/.vimrc
   sed -i.bak "s/.*set -g status-bg colour.*/set -g status-bg colour7/g" ~/.tmux.conf
   sed -i.bak "s/.*set -g status-fg colour.*/set -g status-fg colour0/g" ~/.tmux.conf
+  sed -i.bak "s/.*Solarized.*/ColorScheme=SolarizedLight/g" ~/.local/share/konsole/Profile\ 1.profile
   tmux source-file ~/.tmux.conf
+  echo "ZSH_THEME=\"agnoster-light-kelog\"" > ~/.theme.sh
+  source ~/.zshrc
 }
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:."
@@ -104,6 +111,7 @@ stty -ixon
 export NVM_DIR="/home/kelog/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export SDKMAN_DIR="/home/kelog/.sdkman"
-[[ -s "/home/kelog/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kelog/.sdkman/bin/sdkman-init.sh"
+# this slows down everything!!
+#export SDKMAN_DIR="/home/kelog/.sdkman"
+#[[ -s "/home/kelog/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kelog/.sdkman/bin/sdkman-init.sh"
 

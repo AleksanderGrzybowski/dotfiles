@@ -1,1 +1,3 @@
 source ~/.vimrc
+map <Leader>r :action Rerun<CR>
+

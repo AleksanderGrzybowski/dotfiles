@@ -10,6 +10,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/nerdtree'
+Plugin 'metakirby5/codi.vim'
 Bundle 'altercation/vim-colors-solarized'
 
 call vundle#end()
@@ -51,12 +52,6 @@ set incsearch
 nnoremap <c-s> :wa<CR>
 inoremap <c-s> <Esc>:wa<CR>a
 
-" IntelliJ shortcuts for tabs
-nnoremap <M-Right> :<C-U>tabnext<CR>
-inoremap <M-Right> <C-\><C-N>:tabnext<CR>i
-noremap <M-Left> :<C-U>tabprevious<CR>
-inoremap <M-Left> <C-\><C-N>:tabprevious<CR>
-
 " mouse enabled
 set mouse=a
 
@@ -86,8 +81,13 @@ set autowrite
 let mapleader = ","
 nmap <Leader>n :NERDTreeToggle<CR>
 nmap <Leader>h :noh<CR>
+nmap <Leader>w :wa<CR>
 
 " changing cursor line/block doesn't really work in tmux
 " so this workaround...
 au InsertEnter * hi StatusLine ctermfg=3
 au InsertLeave * hi StatusLine ctermfg=10
+
+" http://stackoverflow.com/questions/6453595/prevent-vim-from-clearing-the-clipboard-on-exit
+autocmd VimLeave * call system("xsel -ib", getreg('+'))
+

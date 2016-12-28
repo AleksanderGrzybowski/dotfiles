@@ -9,7 +9,7 @@
 	conflictstyle = diff3
 [user]
 	name = Aleksander Grzybowski
-	email = some@email.com
+	email = ifyouseethis@tellmeplease.it
 	useconfigonly = true
 [push]
 	default = current
@@ -18,6 +18,7 @@
 [alias]
 	lg = log --graph --pretty=format:'%Cred%h%Creset %Cgreen%an%Creset:%C(yellow)%d%Creset %s %Cblue%cr %C(magenta)%Creset' --all
 	co = checkout
+    rb = rebase
 	ci = commit
 	br = branch -v
 	st = status
@@ -29,3 +30,9 @@
     discard = checkout --
     testcommit = !echo $1 > $1 && git add $1 && git commit -m $1
     fuck = reset --hard HEAD
+    gr = grep -I --ignore-case
+    addamend = !git add -A && git commit --amend
+[diff]
+	tool = kompare
+[difftool]
+	prompt = false
