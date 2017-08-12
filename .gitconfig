@@ -29,7 +29,6 @@
     unstage = reset -q HEAD --
     discard = checkout --
     testcommit = !echo $1 > $1 && git add $1 && git commit -m $1
-    fuck = reset --hard HEAD
     gr = grep -I --ignore-case
     addamend = !git add -A && git commit --amend
 [diff]

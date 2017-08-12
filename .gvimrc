@@ -35,3 +35,11 @@ nnoremap <C-kMinus> :SmallerFont<CR>
 if has("gui_running")
 	set lines=36 columns=80
 endif
+
+" My favorite font
+set guifont=Hack\ 10
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
+

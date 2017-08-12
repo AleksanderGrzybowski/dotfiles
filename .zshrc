@@ -54,7 +54,7 @@ SAVEHIST=$HISTSIZE
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker bower gradle grails gulp mvn npm node)
+plugins=(git docker bower gradle grails gulp mvn npm node vagrant)
 
 # ctrl-g opens editor with command line
 autoload -z edit-command-line
@@ -74,6 +74,7 @@ theme-dark() {
   echo "ZSH_THEME=\"agnoster-kelog\"" > ~/.theme.sh
   source ~/.zshrc
 }
+
 theme-light() {
   printf '\033Ptmux;\033\033]50;konsoleprofile colors=SolarizedLight\007\033\\'
   sed -i.bak s/background=dark/background=light/g ~/.vimrc
@@ -95,9 +96,8 @@ export EDITOR='vim'
 alias s='sudo'
 alias gitk='gitk --all'
 alias gitg='gitg --all'
-alias docker='sudo docker'
-alias docker-compose='sudo docker-compose'
-alias mocha="mocha --no-colors"
+alias d='docker'
+alias dm='docker-machine'
 
 setopt NO_HUP
 
@@ -111,7 +111,10 @@ stty -ixon
 export NVM_DIR="/home/kelog/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# this slows down everything!!
-#export SDKMAN_DIR="/home/kelog/.sdkman"
-#[[ -s "/home/kelog/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kelog/.sdkman/bin/sdkman-init.sh"
+# http://unix.stackexchange.com/questions/131310/add-home-bin-to-path-for-a-single-user-in-debian-wheezy-with-lxde
+if [ -d $HOME/bin ]; then
+    export PATH="$HOME/bin:$PATH"
+fi
 
+# Docker Machine VM-s folder
+export MACHINE_STORAGE_PATH=/mnt/Dysk/VirtualBox\ VMs/docker-machine
