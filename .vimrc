@@ -8,7 +8,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/nerdtree'
+Plugin 'junegunn/fzf'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'hashivim/vim-terraform'
+Plugin 'sotte/presenting.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -55,7 +58,6 @@ noremap <buffer> <silent> $ g$
 set clipboard=unnamed,unnamedplus
 
 " things that should be default, but aren't
-imap jk <esc>
 nnoremap ' `
 nnoremap ` '
 noremap Q :echo<CR>
@@ -68,6 +70,7 @@ let mapleader = ","
 nmap <Leader>n :NERDTreeToggle<CR>
 nmap <Leader>h :noh<CR>
 nmap <Leader>w :wa<CR>
+nmap <Leader>f :FZF<CR>
 
 " different colors for normal/insert mode
 au InsertEnter * hi StatusLine ctermfg=3
@@ -75,3 +78,6 @@ au InsertLeave * hi StatusLine ctermfg=10
 
 " http://stackoverflow.com/questions/6453595/prevent-vim-from-clearing-the-clipboard-on-exit
 autocmd VimLeave * call system("xsel -ib", getreg('+'))
+
+" testing if this works for playbooks
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
