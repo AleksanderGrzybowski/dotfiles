@@ -25,7 +25,7 @@ export UPDATE_ZSH_DAYS=60
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -44,7 +44,7 @@ COMPLETION_WAITING_DOTS="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # unlimited history size
-HISTSIZE=999999999
+HISTSIZE=9999999
 SAVEHIST=$HISTSIZE
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -54,7 +54,7 @@ SAVEHIST=$HISTSIZE
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker bower gradle grails gulp mvn npm node vagrant)
+plugins=(git docker docker-compose kubectl aws) 
 
 # ctrl-g opens editor with command line
 autoload -z edit-command-line
@@ -69,7 +69,7 @@ theme-dark() {
   sed -i.bak s/background=light/background=dark/g ~/.vimrc
   sed -i.bak "s/.*set -g status-bg colour.*/set -g status-bg colour0/g" ~/.tmux.conf
   sed -i.bak "s/.*set -g status-fg colour.*/set -g status-fg colour7/g" ~/.tmux.conf
-  sed -i.bak "s/.*Solarized.*/ColorScheme=Solarized Dark/g" ~/.local/share/konsole/Profile\ 1.profile
+  sed -i.bak "s/.*Solarized.*/ColorScheme=Solarized/g" ~/.local/share/konsole/Profil\ 1.profile
   tmux source-file ~/.tmux.conf
   echo "ZSH_THEME=\"agnoster-kelog\"" > ~/.theme.sh
   source ~/.zshrc
@@ -80,13 +80,13 @@ theme-light() {
   sed -i.bak s/background=dark/background=light/g ~/.vimrc
   sed -i.bak "s/.*set -g status-bg colour.*/set -g status-bg colour7/g" ~/.tmux.conf
   sed -i.bak "s/.*set -g status-fg colour.*/set -g status-fg colour0/g" ~/.tmux.conf
-  sed -i.bak "s/.*Solarized.*/ColorScheme=SolarizedLight/g" ~/.local/share/konsole/Profile\ 1.profile
+  sed -i.bak "s/.*Solarized.*/ColorScheme=SolarizedLight/g" ~/.local/share/konsole/Profil\ 1.profile
   tmux source-file ~/.tmux.conf
   echo "ZSH_THEME=\"agnoster-light-kelog\"" > ~/.theme.sh
   source ~/.zshrc
 }
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:."
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/kelog/.local/bin:."
 export PATH=./node_modules/.bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
@@ -97,24 +97,24 @@ alias s='sudo'
 alias gitk='gitk --all'
 alias gitg='gitg --all'
 alias d='docker'
+alias dc='docker-compose'
 alias dm='docker-machine'
+alias v='vim'
+alias tf='terraform'
 
 setopt NO_HUP
-
-# kelog - for tmux+vim
-export TERM="xterm-256color"
 
 eval `dircolors ~/.dircolors`
 
 stty -ixon
 
+# for tmux+vim
+export TERM=xterm-256color
+
 export NVM_DIR="/home/kelog/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# http://unix.stackexchange.com/questions/131310/add-home-bin-to-path-for-a-single-user-in-debian-wheezy-with-lxde
-if [ -d $HOME/bin ]; then
-    export PATH="$HOME/bin:$PATH"
-fi
-
 # Docker Machine VM-s folder
-export MACHINE_STORAGE_PATH=/mnt/Dysk/VirtualBox\ VMs/docker-machine
+export MACHINE_STORAGE_PATH=/mnt/Dyks/VirtualBox\ VMs/docker-machine
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
